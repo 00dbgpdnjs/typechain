@@ -1,0 +1,13 @@
+// Configure typescript on this file : How to change to js / give options
+
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ES2015", // Which version of js will you comfile
+        "sourceMap": true,
+        "outDir":"dist" // 컴파일된 것들은 dist로 들어감 / 이 코드가 없으면 같은 디렉토리에 생성됨 (디폴트)
+    }, 
+    // You need to tell ts Which files is included and excluded in comfilation process
+    "include": ["src/**/*"], // ts파일이 src에 있기 때문
+    "exclude": ["node_modules"]
+}

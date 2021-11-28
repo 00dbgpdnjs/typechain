@@ -1,0 +1,50 @@
+typescript
+    - superset of js
+    - looks like js
+    - when comfiling it, comfiled to js
+    - on js
+    - changed to js
+
+Install
+    1. $ npm install typescript --save-dev
+        or $ yarn global add typescript
+            : To run $ npx tsc
+                $ npx tsc : Comfile .ts to .js like index.ts -> index.js  
+                So tsc creates index.js and index.js.map
+                cuz Nodejs can't understand ts So comfile to js
+    2. TSLint
+        in extensions
+    3. $ npm install tsc-watch --save-dev  (development)
+        - $ npx tsc 보다 더 편리한 $ tsc-watch 명령어를 쓰기 위해 ; tsc를 watch 모드로 실행
+        - watch 모드: ts 파일이 수정되면 자동으로 js로 컴파일돼서 consolelog가 있으면 터미널에 출력됨
+
+이 프로젝트 사용법
+    1. $ npm install typescript --save-dev
+    2. $ npm start
+        = $ npm __"scripts": {"start": "node index.js" 에서 가운데 따옴표 문자__
+        = $ npx tsc  $ node index.js 
+
+
+대거 변경 (안해도됨)
+    1. package.json 에서 어느부분 한줄로바꾸기, watch모드로 실행하기 (prestart 필요없어짐) 
+        변경 전
+            {"scripts": { 
+                        // If there is console log on index.ts, it's printed in terminal with $ npm start
+                    "start": "node index.js", 
+                        // "원하는 명령어이름":"실행될 명령어" ; If you run $ npm start[첫번째 따옴표에 넣은 string], index.js will be run 
+                    "prestart": "npx tsc"}}
+                        // When run the code just above, $ npx tsc is run firstly. (왜: ts 파일을 컴파일해야 by $ npx tsc , js 파일이 생성되니까. js 파일이 없는데 어케 node index.js하니)
+        변경 후
+            "scripts": {
+                    "start": "tsc-watch --onSuccess \" node dist/index.js\" "  
+                        // tsc-watch 명령어가 성공하면 node index.js 명령어를 실행해라 / After $ npm install tsc-watch --save-dev
+
+        2번, 3번 하기 싫으면 (프로젝트가 너무 간단해서)
+            "tsc-watch --onSuccess \" node index.js\" "
+
+    2. Create src folder and dist folder
+        index.ts 를 src로 옮기기
+
+    3. tsconfig.json
+        - sourceMap 아래에 "outDir":"dist" 추가
+        - "include": ["index.ts"]  ->  "include": ["src/**/*"]
